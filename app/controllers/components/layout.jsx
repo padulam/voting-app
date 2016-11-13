@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router';
 import ajaxFunctions from '../../common/ajax-functions';
 
 export default class Layout extends React.Component {
@@ -20,7 +19,7 @@ export default class Layout extends React.Component {
 
   _GetProfileData(){
     var appUrl = window.location.origin;
-    var apiUrl = appUrl + '/api/:id';
+    var apiUrl = appUrl + '/api/user/:id';
     var auth = this;
     ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, function(data){
       var userObject = JSON.parse(data);
@@ -62,7 +61,7 @@ export default class Layout extends React.Component {
             <div className="collapse navbar-collapse" id="voting-app-navbar">
               <ul className="nav navbar-nav navbar-right">
                 {newPoll}
-                <li><Link to="/polls">Polls</Link></li>
+                <li><a href="/polls">Polls</a></li>
                 {signIn}
               </ul>
             </div>

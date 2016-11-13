@@ -17,7 +17,7 @@ body{
   resize: none;
 }
 
-.add-poll-jumbo{
+.poll-jumbo{
   padding: 3%;
   margin: 0 auto;
 }
@@ -26,7 +26,7 @@ body{
   margin: 3% 0%;
 }
 
-.add-poll-container{
+.poll-container{
   margin-top: 3%;
 }
 
@@ -66,5 +66,20 @@ body{
 
 .clean-link:hover{
   color:white;
-  text-decoration: underline;
+}
+
+.poll-table{
+  background-color: white;
+}
+
+.poll-table caption{
+  text-align: center;
+  font-size: 2em;
+}
+
+.poll-table a{
+  text-decoration: none;
+  display: block;
+  color: black;
+  text-align:center;
 }
