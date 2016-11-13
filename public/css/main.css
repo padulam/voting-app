@@ -1,0 +1,70 @@
+html,
+body{
+  height:100%;
+}
+
+.app-header{
+  padding: 5%;
+  text-align: center;
+  color: white;
+}
+
+#poll-options{
+  min-height: 150px;
+}
+
+#poll-options{
+  resize: none;
+}
+
+.add-poll-jumbo{
+  padding: 3%;
+  margin: 0 auto;
+}
+
+.create-poll-title{
+  margin: 3% 0%;
+}
+
+.add-poll-container{
+  margin-top: 3%;
+}
+
+.app-jumbotron{
+  background-color: #4F6571;
+}
+
+.navbar{
+  margin-bottom: 0;
+}
+
+.fa-github{
+  color: white;
+}
+
+.app-highlights{
+  color: #4F6571;
+  text-align: center;
+  padding: 3%;
+}
+
+.footer {
+  width: 100%;
+  background-color: #4F6571;
+  color: white;
+  padding: .5%;
+}
+
+#voting-app{
+  min-height: 100%;
+}
+
+.clean-link{
+  color: white;
+  text-decoration: underline;
+}
+
+.clean-link:hover{
+  color:white;
+  text-decoration: underline;
+}
