@@ -1,0 +1,40 @@
+var express = require('express');
+var app = express();
+var port = process.env.PORT||8080;
+var session = require('express-session');
+var routes = require('./app/routes/index');
+var passport = require('passport');
+var mongoose = require('mongoose');
+require('dotenv').load();
+require('./app/config/passport')(passport);
+var webpack = require('webpack');
+var WebpackDevServer = require('webpack-dev-server');
+var config = require('./webpack.config');
+
+new WebpackDevServer(webpack(config),{
+  publicPath: config.output.publicPath,
+  hot: true,
+  historyApiFallback: true,
+  proxy:{
+    "*": "http://localhost:3000"
+  }
+}).listen(port);
+
+mongoose.connect(process.env.MONGO_URI);
+
+app.use(express.static('public'));
+
+app.use('/bower_components', express.static('./bower_components'));
+
+app.use(session({
+  secret: 'secretVoting',
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+routes(app, passport);
+
+app.listen(3000);
