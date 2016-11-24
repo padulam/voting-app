@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var Poll = new Schema({
   title: String,
-  options: Object,
+  options: Array,
   creator: String
 });
 

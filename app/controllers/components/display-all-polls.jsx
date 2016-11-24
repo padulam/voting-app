@@ -1,5 +1,6 @@
 import React from 'react';
 import ajaxFunctions from '../../common/ajax-functions';
+import {Link} from 'react-router';
 
 export default class AllPolls extends React.Component {
   constructor() {
@@ -10,8 +11,6 @@ export default class AllPolls extends React.Component {
 
   componentDidMount() {
     this._fetchAllPolls();
-    console.log('test');
-    console.log(this.state.polls);
   }
 
   _fetchAllPolls(){
@@ -56,7 +55,7 @@ class Poll extends React.Component {
   render(){
     return (
         <tr>
-          <td><a href={"/api/polls/" + this.props.id}>{this.props.title}</a></td>
+          <td><Link to={"/polls/" + this.props.id}>{this.props.title}</Link></td>
         </tr>
       );
   }

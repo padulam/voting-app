@@ -28,9 +28,13 @@ module.exports = function(app, passport){
     response.sendFile(path.resolve(dir, 'public', 'index.html'));
   });
 
+  app.get('/polls/:poll_id', function(request, response){
+    response.sendFile(path.resolve(dir, 'public', 'index.html'));
+  });
+
   app.route('/api/user/:id')
     .get(function(request, response){
-      response.json(request.user.twitter);
+      response.json(request.user||null);
     });
 
   app.route('/auth/twitter')
@@ -47,8 +51,10 @@ module.exports = function(app, passport){
 
   app.get('/api/getallpolls', pollApi.getAllPolls);
 
+  app.put('/api/polls/:poll_id', jsonParser, pollApi.updatePoll);
+
   app.route('/api/polls/:poll_id')
     .delete(pollApi.removePoll)
     .get(pollApi.getPoll)
-    .put(pollApi.updatePoll);
+    // .put(urlencodedParser, pollApi.updatePoll);
 };

@@ -17,9 +17,17 @@ body{
   resize: none;
 }
 
+#vote,
+#other,
+.submit-vote{
+  width: 100%;
+  max-width: 375px;
+}
+
 .poll-jumbo{
   padding: 3%;
   margin: 0 auto;
+  min-height: 500px;
 }
 
 .create-poll-title{
@@ -81,5 +89,17 @@ body{
   text-decoration: none;
   display: block;
   color: black;
+  text-align:center;
+}
+
+.other-field{
+  display: block;
+}
+
+.no-other-field{
+  display: none;
+}
+
+.chart-unavailable{
   text-align:center;
 }

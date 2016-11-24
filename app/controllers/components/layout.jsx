@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 import ajaxFunctions from '../../common/ajax-functions';
 
 export default class Layout extends React.Component {
@@ -42,7 +43,7 @@ export default class Layout extends React.Component {
     if(!this.state.authenticated){
       var signIn = <SignIn AuthenticateTwitter={this._AuthenticateTwitter}/>;
     }else{
-      var newPoll = <li><a href="/newpoll">New Poll</a></li>;
+      var newPoll = <li><Link to="/newpoll">New Poll</Link></li>;
     }
 
     return(
@@ -56,12 +57,12 @@ export default class Layout extends React.Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <a href="/" className="navbar-brand">PollSocial</a>
+              <Link to="/" className="navbar-brand">PollSocial</Link>
             </div>
             <div className="collapse navbar-collapse" id="voting-app-navbar">
               <ul className="nav navbar-nav navbar-right">
                 {newPoll}
-                <li><a href="/polls">Polls</a></li>
+                <li><Link to="/polls">Polls</Link></li>
                 {signIn}
               </ul>
             </div>
