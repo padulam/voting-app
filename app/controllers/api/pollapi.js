@@ -23,7 +23,7 @@ function PollApi(){
     poll.save(function(err){
       if(err) response.json({error: err});
 
-      response.json({success: 'poll created'});
+      response.redirect('/polls/' + poll._id);
     });
   };
 
@@ -61,11 +61,11 @@ function PollApi(){
   this.removePoll = function(request, response){
     Polls.remove({
       _id: request.params.poll_id
-    }), function(err, poll){
+    }, function(err, poll){
       if(err) response.json({error: err});
 
-      response.json({success: 'poll removed'});
-    }
+      response.json({'success': 'poll removed'});
+    });
   }
 
   this.getPoll = function(request, response){

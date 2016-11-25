@@ -19,9 +19,12 @@ body{
 
 #vote,
 #other,
-.submit-vote{
+.submit-vote,
+.share-twitter,
+.remove-poll{
   width: 100%;
   max-width: 375px;
+  margin: 1%;
 }
 
 .poll-jumbo{

@@ -8,11 +8,12 @@ export default class PollDisplay extends React.Component {
   constructor(props) {
     super(props);
   
-    this.state = {poll:{}};
+    this.state = {poll:{}, user: undefined};
   }
 
   componentWillMount() {
     this._fetchPollData();
+    this._fetchUserData();
   }
 
   _fetchPollData(){
@@ -21,7 +22,19 @@ export default class PollDisplay extends React.Component {
     var polls = this;
 
     ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, function(data){
-      polls.setState({poll: JSON.parse(data)});
+      polls.setState({poll: JSON.parse(data), authenticated: polls.state.user});
+    }));
+  }
+
+  _fetchUserData(){
+    var appUrl = window.location.origin;
+    var apiUrl = appUrl + '/api/user/:id';
+    var polls = this;
+
+    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, function(data){
+      let userObject = JSON.parse(data);
+
+      polls.setState({polls: polls.state.polls, user: userObject});
     }));
   }
 
@@ -41,7 +54,7 @@ export default class PollDisplay extends React.Component {
       <div className="container poll-container">
         <div className="jumbotron poll-jumbo">
           <div className="container">
-            <PollData submitVote={this._submitVote.bind(this)} title={this.state.poll.title} id={this.state.poll._id} options={this.state.poll.options} />
+            <PollData user={this.state.user} creator={this.state.poll.creator} submitVote={this._submitVote.bind(this)} title={this.state.poll.title} id={this.state.poll._id} options={this.state.poll.options} />
             <PollChart options={this.state.poll.options} />
           </div>
         </div>
@@ -67,6 +80,20 @@ class PollChart extends React.Component {
     return undefined;
   }
 
+  _getRandomColors(count){
+    //Uses base colors from angular-chart.js
+    const BASE_COLORS = ['#97BBCD', '#DCDCDC', '#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'];
+    let colors = BASE_COLORS;
+
+    if(count>colors.length){
+      let needColors = count - colors.length;
+      var temp = randomColor({count: needColors});
+      colors = colors.concat(temp);
+    }
+
+    return colors;
+  }
+
   render(){
     let opts = this._formatOptions();
     let doughnut;
@@ -77,7 +104,7 @@ class PollChart extends React.Component {
         datasets: [
             {
                 data: opts.votes,
-                backgroundColor: randomColor({count: opts.names.length, hue: 'blue'})
+                backgroundColor: this._getRandomColors(opts.names.length)
             }]
       };
 
@@ -137,6 +164,7 @@ class PollData extends React.Component {
 
   render(){
     let otherClass;
+
     if(this.state.selected === 'Other'){
       otherClass = 'other-field';
     }else{
@@ -144,6 +172,18 @@ class PollData extends React.Component {
     }
 
     const options = this._getOptions();
+
+    let shareTweets;
+    let removePoll;
+
+    if(this.props.user){
+      shareTweets = <ShareTwitter title={this.props.title} />;
+
+      if(this.props.creator === this.props.user.twitter.username){
+        removePoll = <RemovePoll id={this.props.id}/>;
+      }
+    }
+
     return(
       <div className="col-lg-6">
         <h2>{this.props.title}</h2>
@@ -160,7 +200,51 @@ class PollData extends React.Component {
           </div>
           <button className="btn btn-primary submit-vote" type="submit">Submit Vote</button>
         </form>
+        {shareTweets}
+        {removePoll}
       </div>
     );
+  }
+}
+
+class ShareTwitter extends React.Component {
+  constructor() {
+    super();
+  
+    this._tweetPoll = this._tweetPoll.bind(this);
+  }
+
+  _tweetPoll(){
+    let url = 'https://twitter.com/intent/tweet?text=';
+    let text = this.props.title + ' | PollSocial ' + window.location.href;
+
+    window.open(url + encodeURI(text), '_blank')
+  }
+
+  render(){
+    return (<button onClick={this._tweetPoll} className="btn btn-twitter share-twitter">
+              <span className="fa fa-twitter"></span>Share with Twitter
+            </button>);
+  }
+}
+
+class RemovePoll extends React.Component {
+  constructor() {
+    super();
+  
+    this._deletePoll = this._deletePoll.bind(this);
+  }
+
+  _deletePoll(){
+    var appUrl = window.location.origin;
+    var id = this.props.id;
+    var apiUrl = appUrl + '/api/polls/' + id;
+    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('DELETE', apiUrl, function(data){
+      browserHistory.push('/polls')
+    }));
+  }
+
+  render(){
+    return(<button className="btn btn-danger remove-poll" onClick={this._deletePoll}>Remove Poll</button>);
   }
 }

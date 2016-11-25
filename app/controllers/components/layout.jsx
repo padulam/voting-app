@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {browserHistory} from 'react-router';
 import ajaxFunctions from '../../common/ajax-functions';
 
 export default class Layout extends React.Component {
@@ -22,6 +23,7 @@ export default class Layout extends React.Component {
     var appUrl = window.location.origin;
     var apiUrl = appUrl + '/api/user/:id';
     var auth = this;
+
     ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, function(data){
       var userObject = JSON.parse(data);
 

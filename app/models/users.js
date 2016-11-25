@@ -7,8 +7,7 @@ var User = new Schema({
     token: String,
     username: String,
     displayname: String
-  },
-  polls: Array
+  }
 });
 
 module.exports = mongoose.model('User', User);

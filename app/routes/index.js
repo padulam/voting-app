@@ -32,6 +32,10 @@ module.exports = function(app, passport){
     response.sendFile(path.resolve(dir, 'public', 'index.html'));
   });
 
+  app.get('/profile', function(request, response){
+    response.sendFile(path.resolve(dir, 'public', 'index.html'));
+  });
+
   app.route('/api/user/:id')
     .get(function(request, response){
       response.json(request.user||null);
@@ -42,7 +46,7 @@ module.exports = function(app, passport){
 
   app.route('/auth/twitter/callback')
     .get(passport.authenticate('twitter', {
-      successRedirect: '/newpoll',
+      successRedirect: '/polls',
       failureRedirect: '/login',
       failureFlash: true
     }));
@@ -56,5 +60,4 @@ module.exports = function(app, passport){
   app.route('/api/polls/:poll_id')
     .delete(pollApi.removePoll)
     .get(pollApi.getPoll)
-    // .put(urlencodedParser, pollApi.updatePoll);
 };
