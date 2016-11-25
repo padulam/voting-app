@@ -36,6 +36,12 @@ module.exports = function(app, passport){
     response.sendFile(path.resolve(dir, 'public', 'index.html'));
   });
 
+  app.route('/logout')
+    .get(function(request, response){
+      request.logout();
+      response.redirect('/');
+  });
+
   app.route('/api/user/:id')
     .get(function(request, response){
       response.json(request.user||null);

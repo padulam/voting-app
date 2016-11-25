@@ -8,15 +8,20 @@ export default class Layout extends React.Component {
     super();
 
     this.state = {
-      authenticated: false
+      user: undefined
     }
 
     this._AuthenticateTwitter = this._AuthenticateTwitter.bind(this);
+    this._DeauthenticateTwitter = this._DeauthenticateTwitter.bind(this);
     this._GetProfileData = this._GetProfileData.bind(this);
   }
 
   _AuthenticateTwitter(){
     window.location = '/auth/twitter'
+  }
+
+  _DeauthenticateTwitter(){
+    window.location = '/logout';
   }
 
   _GetProfileData(){
@@ -27,25 +32,28 @@ export default class Layout extends React.Component {
     ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, function(data){
       var userObject = JSON.parse(data);
 
-      if(userObject){
-        auth.setState({authenticated: true});
-      } else{
-        auth.setState({authenticated: false});
-      }
+      auth.setState({user: userObject});
     }));
   }
-
-  cw
 
   componentWillMount() {
     this._GetProfileData();
   }
 
   render(){
-    if(!this.state.authenticated){
+    if(!this.state.user){
       var signIn = <SignIn AuthenticateTwitter={this._AuthenticateTwitter}/>;
     }else{
       var newPoll = <li><Link to="/newpoll">New Poll</Link></li>;
+      var userProfile = (<li className="dropdown">
+                          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{this.state.user.twitter.displayName} <span className="caret"></span></a>
+                          <ul className="dropdown-menu">
+                            <li><Link to="/profile">Profile</Link></li>
+                            <li role="separator" className="divider"></li>
+                            <li className="text-center"><SignOut DeauthenticateTwitter={this._DeauthenticateTwitter} /></li>
+                          </ul>
+                        </li>);
+      
     }
 
     return(
@@ -65,7 +73,7 @@ export default class Layout extends React.Component {
               <ul className="nav navbar-nav navbar-right">
                 {newPoll}
                 <li><Link to="/polls">Polls</Link></li>
-                {signIn}
+                {signIn||userProfile}
               </ul>
             </div>
           </div>
@@ -76,9 +84,17 @@ export default class Layout extends React.Component {
   }
 }
 
+class SignOut extends React.Component {
+  render(){
+    return (<li><button onClick={this.props.DeauthenticateTwitter}  className="btn btn-twitter sign-out navbar-btn">
+              <span className="fa fa-twitter"></span> Sign Out
+            </button></li>);
+  }
+}
+
 class SignIn extends React.Component {
   render(){
-    return (<li><button onClick={this.props.AuthenticateTwitter}  className="btn btn-twitter ghost-button navbar-btn">
+    return (<li><button onClick={this.props.AuthenticateTwitter}  className="btn btn-twitter navbar-btn">
               <span className="fa fa-twitter"></span> Sign in with Twitter
             </button></li>);
   }

@@ -106,3 +106,8 @@ body{
 .chart-unavailable{
   text-align:center;
 }
+
+.sign-out{
+  width: 80%;
+  margin: 2%;
+}

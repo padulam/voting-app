@@ -27,14 +27,12 @@ export default class Profile extends React.Component {
   render(){
     let user = undefined;
     console.log(this.state.user)
-
     if(this.state.user){
-      user = this.state.user.twitter.username;
+      user = this.state.user.twitter.displayName;
     }
-    console.log(user)
 
     return(
-      <h1>Welcome {user}!</h1>
+      <h1 className="text-center">Welcome {user}!</h1>
     );
   }
 }
