@@ -16,14 +16,14 @@ function PollApi(){
   this.createPoll = function(request, response){
     var poll = new Polls();
 
-    poll.title = request.body.pollName;
-    poll.options = parseOptions(request.body.pollOptions);
+    poll.title = request.body.title;
+    poll.options = parseOptions(request.body.options);
     poll.creator = request.user.twitter.username;
 
     poll.save(function(err){
       if(err) response.json({error: err});
 
-      response.redirect('/polls/' + poll._id);
+      response.json(poll);
     });
   };
 
@@ -64,7 +64,7 @@ function PollApi(){
     }, function(err, poll){
       if(err) response.json({error: err});
 
-      response.json({'success': 'poll removed'});
+      response.json(poll);
     });
   }
 
@@ -78,6 +78,14 @@ function PollApi(){
 
   this.getAllPolls = function(request, response){
     Polls.find(function(err, polls){
+      if(err) response.json({error: err});
+
+      response.json(polls);
+    });
+  };
+
+  this.getUserPolls = function(request, response){
+    Polls.find({creator: request.params.username}, function(err, polls){
       if(err) response.json({error: err});
 
       response.json(polls);

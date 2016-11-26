@@ -86,9 +86,9 @@ export default class Layout extends React.Component {
 
 class SignOut extends React.Component {
   render(){
-    return (<li><button onClick={this.props.DeauthenticateTwitter}  className="btn btn-twitter sign-out navbar-btn">
+    return (<button onClick={this.props.DeauthenticateTwitter}  className="btn btn-twitter sign-out navbar-btn">
               <span className="fa fa-twitter"></span> Sign Out
-            </button></li>);
+            </button>);
   }
 }
 

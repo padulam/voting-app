@@ -111,3 +111,57 @@ body{
   width: 80%;
   margin: 2%;
 }
+
+.poll-dashboard{
+  text-align: center;
+  margin-top:7%;
+}
+
+.poll-container {
+  background-color: #EEE;
+  padding: 20px;
+  min-height: 70px;
+  border-radius: 10px;
+  margin-bottom: 3%;
+}
+
+.poll-title {
+  display: block;
+  overflow: auto;
+}
+
+.poll-name {
+  float: left;
+}
+
+.remove-button {
+  float: right;
+  border: none;
+  background-color: transparent;
+  transition: color 0.25s;
+  font-size: 16px;
+  color: red;
+}
+
+.results-table caption {
+  text-align: center;
+  color: black;
+  font-size: 1.25em;
+}
+
+.results-table th{
+  text-align: center;
+}
+
+.my-polls{
+  padding: 5%;
+  text-align: center;
+}
+
+.dashboard-data{
+  font-size: 2em;
+}
+
+.no-poll-data{
+  padding: 25% 0% 0% 0%;
+}

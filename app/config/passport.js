@@ -30,6 +30,7 @@ module.exports = function(passport){
             newUser.twitter.id = profile.id;
             newUser.twitter.username = profile.username;
             newUser.twitter.displayName = profile.displayName;
+            newUser.created = Date();
 
             newUser.save(function(err){
               if(err) throw(err);

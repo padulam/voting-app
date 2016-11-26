@@ -50,12 +50,20 @@ export default class PollDisplay extends React.Component {
   }
 
   render(){
+    let pollChart = undefined
+
+    if(this.state.poll.__v===0){
+      pollChart = <div className="col-lg-6"><p className="no-poll-data text-center">No one has voted on this poll</p></div>;
+    }else{
+      pollChart = <PollChart options={this.state.poll.options} />;
+    }
+
     return(
       <div className="container poll-container">
         <div className="jumbotron poll-jumbo">
           <div className="container">
             <PollData user={this.state.user} creator={this.state.poll.creator} submitVote={this._submitVote.bind(this)} title={this.state.poll.title} id={this.state.poll._id} options={this.state.poll.options} />
-            <PollChart options={this.state.poll.options} />
+            {pollChart}
           </div>
         </div>
       </div>

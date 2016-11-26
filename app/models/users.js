@@ -7,7 +7,8 @@ var User = new Schema({
     token: String,
     username: String,
     displayName: String
-  }
+  },
+  created: Date
 });
 
 module.exports = mongoose.model('User', User);

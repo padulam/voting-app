@@ -57,11 +57,13 @@ module.exports = function(app, passport){
       failureFlash: true
     }));
 
-  app.post('/api/createpoll', urlencodedParser, pollApi.createPoll);
+  app.post('/api/createpoll', jsonParser, pollApi.createPoll);
 
   app.get('/api/getallpolls', pollApi.getAllPolls);
 
   app.put('/api/polls/:poll_id', jsonParser, pollApi.updatePoll);
+
+  app.get('/api/mypolls/:username', pollApi.getUserPolls);
 
   app.route('/api/polls/:poll_id')
     .delete(pollApi.removePoll)

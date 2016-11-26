@@ -35,19 +35,35 @@ export default class AllPolls extends React.Component {
   }
 
   render(){
-    const polls = this._getAllPolls();
+    let polls = this._getAllPolls();
+    let pollDisplay = undefined;
+    
+    if(polls.length===0){
+      pollDisplay = <p className="text-center">There are no active polls</p>;
+    }else{
+      pollDisplay = <PollTable polls={polls} />
+    }
+
     return(
       <div className="container poll-container">
+        <h2 className="text-center">Polls</h2>
         <div className="jumbotron poll-jumbo">
-          <table className="table table-hover table-bordered poll-table">
-            <caption>Polls</caption>
-            <tbody>
-              {polls}
-            </tbody>
-          </table>
+          {pollDisplay}
         </div>
       </div>
     );
+  }
+}
+
+class PollTable extends React.Component {
+  render(){
+    return(
+      <table className="table table-hover table-bordered poll-table">
+        <tbody>
+          {this.props.polls}
+        </tbody>
+      </table>
+    )
   }
 }
 
