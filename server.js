@@ -7,18 +7,21 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 require('dotenv').load();
 require('./app/config/passport')(passport);
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
 
-new WebpackDevServer(webpack(config),{
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true,
-  proxy:{
-    "*": "http://localhost:3000"
-  }
-}).listen(8080);
+if(port!==3000){
+  var webpack = require('webpack');
+  var WebpackDevServer = require('webpack-dev-server');
+  var config = require('./webpack.config');
+
+  new WebpackDevServer(webpack(config),{
+    publicPath: config.output.publicPath,
+    hot: true,
+    historyApiFallback: true,
+    proxy:{
+      "*": "http://localhost:3000"
+    }
+  }).listen(8080);
+}
 
 mongoose.connect(process.env.MONGO_URI);
 
