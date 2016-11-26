@@ -1,7 +1,7 @@
 var Polls = require('../../models/polls');
 
 function parseOptions(options){
-  var arr = options.split(/\r\n/);
+  var arr = options.split(/\n/);
 
   var opts = [];
 
