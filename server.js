@@ -5,10 +5,10 @@ var session = require('express-session');
 var routes = require('./app/routes/index');
 var passport = require('passport');
 var mongoose = require('mongoose');
-require('dotenv').load();
 require('./app/config/passport')(passport);
 
 if(port===3000){
+  require('dotenv').load();
   var webpack = require('webpack');
   var WebpackDevServer = require('webpack-dev-server');
   var config = require('./webpack.config');
