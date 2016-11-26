@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 require('dotenv').load();
 require('./app/config/passport')(passport);
 
-if(port!==3000){
+if(port===3000){
   var webpack = require('webpack');
   var WebpackDevServer = require('webpack-dev-server');
   var config = require('./webpack.config');
