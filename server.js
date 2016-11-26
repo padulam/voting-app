@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var port = process.env.PORT||8080;
+var port = process.env.PORT||3000;
 var session = require('express-session');
 var routes = require('./app/routes/index');
 var passport = require('passport');
@@ -18,7 +18,7 @@ new WebpackDevServer(webpack(config),{
   proxy:{
     "*": "http://localhost:3000"
   }
-}).listen(port);
+}).listen(8080);
 
 mongoose.connect(process.env.MONGO_URI);
 
@@ -37,4 +37,4 @@ app.use(passport.session());
 
 routes(app, passport);
 
-app.listen(3000);
+app.listen(port);
