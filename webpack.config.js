@@ -13,7 +13,7 @@ var config = {
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/js/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
