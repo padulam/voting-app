@@ -150,8 +150,11 @@ class PollData extends React.Component {
         i++;
         return <option key={i} value={option.name}>{option.name}</option>;
       });
-  
-      options.push(<option key={options.length+1} value='Other'>Other</option>)
+      
+      if(this.props.user){
+        options.push(<option key={options.length+1} value='Other'>Other</option>);
+      }
+      
       return options;
     }
     return undefined;
