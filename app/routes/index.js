@@ -8,14 +8,6 @@ module.exports = function(app, passport){
   var urlencodedParser = bodyParser.urlencoded({ extended: false })
   var pollApi = new PollApi();
 
-  function isLoggedIn(request,response,next){
-    if(request.isAuthenticated()){
-      return next();
-    } else{
-      response.redirect('/login');
-    }
-  }
-
   app.get('/', function(request, response){
     response.sendFile(path.resolve(dir, 'public', 'index.html'));
   });
@@ -53,7 +45,7 @@ module.exports = function(app, passport){
   app.route('/auth/twitter/callback')
     .get(passport.authenticate('twitter', {
       successRedirect: '/polls',
-      failureRedirect: '/login',
+      failureRedirect: '/',
       failureFlash: true
     }));
 
