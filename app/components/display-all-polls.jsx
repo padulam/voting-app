@@ -1,5 +1,5 @@
 import React from 'react';
-import ajaxFunctions from '../../common/ajax-functions';
+import ajaxFunctions from '../common/ajax-functions';
 import {Link} from 'react-router';
 
 export default class AllPolls extends React.Component {

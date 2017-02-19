@@ -1,6 +1,6 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
-import ajaxFunctions from '../../common/ajax-functions';
+import ajaxFunctions from '../common/ajax-functions';
 
 export default class CreatePoll extends React.Component {
   constructor(props) {

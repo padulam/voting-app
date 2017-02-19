@@ -1,5 +1,5 @@
 import React from 'react';
-import ajaxFunctions from '../../common/ajax-functions';
+import ajaxFunctions from '../common/ajax-functions';
 import {browserHistory} from 'react-router';
 import {Doughnut} from 'react-chartjs-2';
 import randomColor from 'randomcolor';

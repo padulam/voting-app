@@ -1,5 +1,5 @@
 import React from 'react';
-import ajaxFunctions from '../../common/ajax-functions';
+import ajaxFunctions from '../common/ajax-functions';
 import UserPolls from './display-user-polls.jsx';
 
 export default class Profile extends React.Component {

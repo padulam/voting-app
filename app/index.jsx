@@ -6,7 +6,7 @@ import CreatePoll from './components/create-poll.jsx';
 import AllPolls from './components/display-all-polls.jsx';
 import PollDisplay from './components/display-poll.jsx';
 import Profile from './components/profile.jsx';
-import ajaxFunctions from '../common/ajax-functions';
+import ajaxFunctions from './common/ajax-functions';
 import {browserHistory, Router, Route, Redirect, IndexRoute} from 'react-router';
 
 function authenticate(nextState, replace) {
