@@ -1,6 +1,7 @@
 import React from 'react';
 import ajaxFunctions from '../common/ajax-functions';
-import {Link} from 'react-router';
+import Poll from './poll.jsx';
+import PollTable from './poll-table.jsx';
 
 export default class AllPolls extends React.Component {
   constructor() {
@@ -52,27 +53,5 @@ export default class AllPolls extends React.Component {
         </div>
       </div>
     );
-  }
-}
-
-class PollTable extends React.Component {
-  render(){
-    return(
-      <table className="table table-hover table-bordered poll-table">
-        <tbody>
-          {this.props.polls}
-        </tbody>
-      </table>
-    )
-  }
-}
-
-class Poll extends React.Component {
-  render(){
-    return (
-        <tr>
-          <td><Link to={"/polls/" + this.props.id}>{this.props.title}</Link></td>
-        </tr>
-      );
   }
 }
