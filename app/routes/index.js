@@ -9,14 +9,14 @@ module.exports = function(app, passport){
   var pollApi = new PollApi();
 
   function httpsRouting(request, response, next){
-    if(request.headers["x-forwarded-proto"] !== "https"&&process.env.NODE_ENV==='production'){
+    if(request.headers["x-forwarded-proto"]!== "https"){
       response.redirect('https://' + request.hostname + request.originalUrl);
     }else{
       next();
     }
   }
 
-  app.use(httpsRouting);
+  app.all('*', httpsRouting);
 
   app.get('/', function(request, response){
     response.sendFile(path.resolve(dir, 'public', 'index.html'));
