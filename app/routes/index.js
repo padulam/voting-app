@@ -8,16 +8,6 @@ module.exports = function(app, passport){
   var urlencodedParser = bodyParser.urlencoded({ extended: false })
   var pollApi = new PollApi();
 
-  function httpsRouting(request, response, next){
-    if(request.headers["x-forwarded-proto"]!== "https"){
-      response.redirect('https://' + request.hostname + request.originalUrl);
-    }else{
-      next();
-    }
-  }
-
-  app.all('*', httpsRouting);
-
   app.get('/', function(request, response){
     response.sendFile(path.resolve(dir, 'public', 'index.html'));
   });
